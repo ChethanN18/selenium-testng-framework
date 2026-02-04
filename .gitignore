@@ -8,3 +8,12 @@
 # OS
 .DS_Store
 Thumbs.db
+
+#Drivers
+drivers/*.exe
+
+#Reports
+reports/
+
+#Maven
+target/

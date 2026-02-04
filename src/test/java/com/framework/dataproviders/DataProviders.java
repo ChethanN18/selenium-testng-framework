@@ -13,14 +13,14 @@ public class DataProviders {
     public static Object[][] loginData() {
 
         List<Map<String, String>> data =
-                ExcelUtils.getTestData("LoginTest");
+                ExcelUtils.getTestData("LoginSheet");
 
         Object[][] result = new Object[data.size()][1];
 
         for (int i = 0; i < data.size(); i++) {
             result[i][0] = data.get(i);
         }
-
+        System.out.println("Data size: " + data.size());
         return result;
     }
 

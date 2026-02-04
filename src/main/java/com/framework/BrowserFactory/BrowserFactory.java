@@ -13,32 +13,44 @@ import com.framework.driver.DriverFactory;
 public class BrowserFactory {
 	
 	public static void initDriver(String browser) {
-		WebDriver driver;
-		
-		switch (browser.toLowerCase()) {
-		case "Chrome":
-			ChromeOptions options = new ChromeOptions();
-            options.addArguments("--start-maximized");
-            driver = new ChromeDriver(options); 
-			break;
-			
-		case "firefox":
-			FirefoxOptions fireFoxOptions = new FirefoxOptions();
-			fireFoxOptions.addArguments("--start-maximized");
-			driver = new FirefoxDriver(fireFoxOptions);
+
+        WebDriver driver;
+
+        String projectPath = System.getProperty("user.dir");
+
+        switch (browser.toLowerCase().trim()) {
+
+        case "chrome":
+            System.setProperty("webdriver.chrome.driver",
+                    projectPath + "/drivers/chromedriver.exe");
+
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.addArguments("--start-maximized");
+            driver = new ChromeDriver(chromeOptions);
             break;
 
         case "edge":
-        	EdgeOptions edgeOptions = new EdgeOptions();
-        	edgeOptions.addArguments("--start-maximized");
-        	driver = new EdgeDriver(edgeOptions);
+            System.setProperty("webdriver.edge.driver",
+                    projectPath + "/drivers/msedgedriver.exe");
+
+            EdgeOptions edgeOptions = new EdgeOptions();
+            edgeOptions.addArguments("--start-maximized");
+            driver = new EdgeDriver(edgeOptions);
             break;
 
-		default:
-			throw new RuntimeException("Unsupported browser: " + browser);
-		}
-		
-		DriverFactory.setDriver(driver);
-	}
+        case "firefox":
+            System.setProperty("webdriver.gecko.driver",
+                    projectPath + "/drivers/geckodriver.exe");
+
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            driver = new FirefoxDriver(firefoxOptions);
+            break;
+
+        default:
+            throw new RuntimeException("Unsupported browser: " + browser);
+        }
+
+        DriverFactory.setDriver(driver);
+    }
 
 }

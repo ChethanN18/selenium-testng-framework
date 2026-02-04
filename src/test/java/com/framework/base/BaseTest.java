@@ -9,12 +9,12 @@ import com.framework.BrowserFactory.BrowserFactory;
 import com.framework.driver.DriverFactory;
 import com.framework.utils.ConfigLoader;
 
-public class BaseTest {
+public abstract class BaseTest {
 	
 	@Parameters({"browser", "env"})
     @BeforeMethod
-    public void setUp(@Optional("chrome") String browser,
-                      @Optional("qa") String env) {
+    public void setUp(@Optional("edge") String browser,
+                      @Optional("tst") String env) {
 
         BrowserFactory.initDriver(browser);
 
